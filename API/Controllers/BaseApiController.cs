@@ -1,5 +1,7 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace API.Controllers
 {
@@ -7,10 +9,9 @@ namespace API.Controllers
     [Route("api/[controller]")]
     public class BaseApiController<T> : ControllerBase
     {
-        protected readonly ILogger<T> _logger;
-        public BaseApiController(ILogger<T> logger)
-        {
-            _logger = logger;
-        }
+        private ILogger<T> _logger;
+        protected ILogger<T> Logger => _logger ??= HttpContext.RequestServices.GetService<ILogger<T>>();
+        private IMediator _mediator;
+        protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
     }
 }
