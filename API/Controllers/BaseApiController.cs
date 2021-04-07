@@ -11,7 +11,6 @@ namespace API.Controllers
         public BaseApiController(ILogger<T> logger)
         {
             _logger = logger;
-
         }
     }
 }
