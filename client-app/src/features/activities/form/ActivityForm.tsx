@@ -1,18 +1,19 @@
 import React, { ChangeEvent, useState } from 'react'
-import { Button, Form, Header, Segment } from 'semantic-ui-react';
+import { Button, Form, Segment } from 'semantic-ui-react';
 import { Activity } from '../../../app/models/activity';
 
 interface Props {
     activity: Activity | undefined;
     closeForm: () => void;
     createOrEdit: (activity: Activity) => void;
+    submitting: boolean;
 }
 
-function GetHeader(){
-    return "Create an Activity"
-}
+// function GetHeader(){
+//     return "Create an Activity"
+// }
 
-function ActivityForm({closeForm, activity: selectedActivity, createOrEdit}: Props) {
+function ActivityForm({closeForm, activity: selectedActivity, createOrEdit, submitting}: Props) {
 
     const initialState = selectedActivity ?? {
         id: '',
@@ -38,16 +39,16 @@ function ActivityForm({closeForm, activity: selectedActivity, createOrEdit}: Pro
 
     return (
         <Segment clearing>
-            <Header>{GetHeader()}</Header>
+            {/*<Header>{GetHeader()}</Header>*/}
             <Form onSubmit={handleSubmit} autoComplete='off'>
                 <Form.Input placeholder='Title' value={activity.title} name='title' onChange={handleInputChange} />
                 <Form.TextArea placeholder='Description' value={activity.description} name='description' onChange={handleInputChange} />
                 <Form.Input placeholder='Category' value={activity.category} name='category' onChange={handleInputChange}/>
-                <Form.Input placeholder='Date' value={activity.date} name='date' onChange={handleInputChange}/>
+                <Form.Input placeholder='Date' type='date' value={activity.date} name='date' onChange={handleInputChange}/>
                 <Form.Input placeholder='City' value={activity.city} name='city' onChange={handleInputChange}/>
                 <Form.Input placeholder='Venue' value={activity.venue} name='venue' onChange={handleInputChange}/>
 
-                <Button floated='right' positive type='submit' content='Submit'/>
+                <Button loading={submitting} floated='right' positive type='submit' content='Submit'/>
                 <Button onClick={() => closeForm()} floated='right' type='button' content='Cancel'/>
             </Form>
         </Segment>
