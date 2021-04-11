@@ -29,14 +29,6 @@ namespace API.Controllers
             });
         }
 
-        [HttpGet("{name}")]
-        public async Task<ActionResult<Activity>> GetActivityByName(string name)
-        {
-            return await Mediator.Send(new DetailsByName.Query{
-                Name = name
-            });
-        }
-
         //use IActionResult for post
         [HttpPost]
         public async Task<IActionResult> CreateActivity([ FromBody ]Activity activity)
