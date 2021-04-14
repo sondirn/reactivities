@@ -1,14 +1,17 @@
 import React from 'react';
 import { Button, Card,Image } from 'semantic-ui-react';
-import { Activity } from '../../../app/models/activity';
+import LoadingComponent from '../../../app/layout/LoadingComponent';
+import { useStore } from '../../../app/stores/store';
 
-interface Props {
-    activity: Activity;
-    cancelSelectActivity: () => void;
-    openForm: (id: string) => void;
-}
 
-function ActivityDetails({ activity, cancelSelectActivity, openForm }: Props) {
+function ActivityDetails() {
+
+    const {activityStore} = useStore();
+
+    const {selectedActivity: activity, openForm, cancelSelectedActivity: cancelSelectActivity} = activityStore;
+
+    if(!activity) return <LoadingComponent />;
+
     return (
         <Card fluid>
             {/* USE TILDA FOR STRING CONTATONATION */}
