@@ -1,10 +1,11 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
+import { useEffect } from 'react';
 import { Grid } from 'semantic-ui-react';
+import LoadingComponent from '../../../app/layout/LoadingComponent';
 import { useStore } from '../../../app/stores/store';
-import ActivityDetails from '../details/ActivityDetails';
-import ActivityForm from '../form/ActivityForm';
-import ActivitiesList from './ActivitiesList';
+import ActivityList from './ActivityList';
+
 
 //create properties interface
 //we need to specify what properties
@@ -16,23 +17,25 @@ import ActivitiesList from './ActivitiesList';
 function ActivityDashboard() {
 
     const { activityStore } = useStore();
-    const { selectedActivity, editMode } = activityStore;
+    const { loadActivities, activityRegistry } = activityStore;
+
+    useEffect(() => {
+        if(activityRegistry.size <= 1) loadActivities();
+    }, [activityRegistry.size, loadActivities])
+
+    //loading page while app is loading data from server
+    if (activityStore.loadingInitial) return <LoadingComponent content='Loading app' />
+
+
 
     return (
         <>
             <Grid>
                 <Grid.Column width='10'>
-                    <ActivitiesList/>
+                    <ActivityList />
                 </Grid.Column>
                 <Grid.Column width='6'>
-
-                    {selectedActivity && !editMode &&
-                        <ActivityDetails />
-                    }
-
-                    {editMode &&
-                        <ActivityForm />}
-
+                    <h2>Activity Filters</h2>
                 </Grid.Column>
             </Grid>
         </>
