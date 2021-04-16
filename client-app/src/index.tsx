@@ -7,15 +7,16 @@ import 'react-calendar/dist/Calendar.css'
 import 'react-toastify/dist/ReactToastify.min.css'
 import 'semantic-ui-css/semantic.min.css';
 import { store, storeContext } from './app/stores/store';
-import { BrowserRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 
-export const history = createBrowserHistory()
+export const history = createBrowserHistory();
 
 ReactDOM.render(
   <storeContext.Provider value={store}>
-    <BrowserRouter>
+    <Router history={history}>
       <App />
-    </BrowserRouter>
+    </Router>
    ,
   </storeContext.Provider>,
   document.getElementById('root')

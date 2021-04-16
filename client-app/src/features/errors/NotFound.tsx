@@ -19,12 +19,12 @@ function NotFound() {
                 <Segment color='red' style={imageTextStyle} basic >
                     <Header
                         size='huge' style={{color: 'white'}} >
-                            OOPSIE WOOPSIE!! Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys are working VEWY HAWD to fix this! UwW.
+                            OOPSIE WOOPSIE!! Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys are working VEWY HAWD to fix this! UwU.
                     </Header>
                 </Segment>
             <Segment.Inline >
-                <Button as={Link} to='/activities' primary>
-                    Return to activities page.
+                <Button style={{margin: '5% 0% 0% 0'}} color='black' basic as={Link} to='/activities' secondary>
+                    Return to home page.
                 </Button>
             </Segment.Inline>
         </Segment>
