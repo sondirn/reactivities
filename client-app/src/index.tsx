@@ -3,13 +3,19 @@ import ReactDOM from 'react-dom';
 import './app/layout/styles.css';
 import App from './app/layout/App';
 import reportWebVitals from './reportWebVitals';
+import 'react-calendar/dist/Calendar.css'
+import 'react-toastify/dist/ReactToastify.min.css'
 import 'semantic-ui-css/semantic.min.css';
 import { store, storeContext } from './app/stores/store';
 import { BrowserRouter } from 'react-router-dom';
 
+export const history = createBrowserHistory()
+
 ReactDOM.render(
   <storeContext.Provider value={store}>
-    <BrowserRouter>  <App /></BrowserRouter>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
    ,
   </storeContext.Provider>,
   document.getElementById('root')
