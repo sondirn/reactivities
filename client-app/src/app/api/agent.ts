@@ -4,16 +4,15 @@ import { history } from '../..';
 import { Activity } from '../models/activity';
 import { store } from '../stores/store';
 
-const sleep = (delay: number) => {
-    return new Promise((resolve) => {
-        setTimeout(resolve, delay);
-    })
-}
+// const sleep = (delay: number) => {
+//     return new Promise((resolve) => {
+//         setTimeout(resolve, delay);
+//     })
+// }
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
 axios.interceptors.response.use(async response => {
-    await sleep(1000);
     return response;
 }, (error: AxiosError) => {
     const {data, status, config} = error.response!;
