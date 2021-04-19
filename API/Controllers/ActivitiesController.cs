@@ -7,6 +7,7 @@ using Application.Activities;
 using Microsoft.Extensions.Logging;
 using MediatR;
 using System.Threading;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
