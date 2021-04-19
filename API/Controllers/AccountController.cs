@@ -49,16 +49,19 @@ namespace API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
+            //verify if email is not taken
             if (await _userManager.Users.AnyAsync(x => x.Email == registerDto.Email))
             {
                 return BadRequest("Email taken");
             }
 
+            //verify if username is not taken
             if (await _userManager.Users.AnyAsync(x => x.UserName == registerDto.Username))
             {
                 return BadRequest("Username taken");
             }
 
+            //create the user object
             var user = new AppUser
             {
                 DisplayName = registerDto.DisplayName,
@@ -66,6 +69,7 @@ namespace API.Controllers
                 UserName = registerDto.Username,
             };
 
+            //Create the new user w/ password
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
             if(result.Succeeded)
